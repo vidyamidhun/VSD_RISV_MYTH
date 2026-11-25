@@ -24,9 +24,22 @@ The hardware itself is described in a hardware description language (RTL), then 
 
 **To do:** Pick one line of C and write down the assembly instructions your compiler produces for it.
 
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec1/
-     Format: ![Description](images/lec1/screenshot.png) -->
+### C Program
+
+![C program in Leafpad](images/lec1/1.png)
+
+### Program Output
+
+![Compilation and program output](images/lec1/2.png)
+
+### RISC-V Assembly
+
+![Disassembly of the main function](images/lec1/3.png)
+
+### Observations
+
+- The C program is compiled into RISC-V assembly instructions.
+- One line of C can correspond to one or more assembly instructions.
 
 ---
 
