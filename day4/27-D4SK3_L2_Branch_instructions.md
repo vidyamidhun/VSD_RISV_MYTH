@@ -2,54 +2,35 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+A conditional branch changes the PC only when its comparison is true.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+| Instruction | Taken when |
+|---|---|
+| `beq` | operands are equal |
+| `bne` | operands differ |
+| `blt` | first is less than second, signed |
+| `bge` | first is greater than or equal, signed |
+| `bltu` | first is less than second, unsigned |
+| `bgeu` | first is greater than or equal, unsigned |
 
-<Explanation in your own words.>
-
-```text
-Step 1
-    ↓
-Step 2
-```
-
----
-
-## Lab / Implementation
-
-Command or code:
-
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec27/`, then add a line like this:
-
-    ![Description](images/lec27/screenshot.png)
+The target is *branch instruction PC + sign-extended B immediate*. If the branch is not taken, execution continues at PC + 4.
 
 ---
 
-## Observations
+## My Lab Work and Results
 
-- <what you saw>
+**To do:** Show one branch that is taken and one that is not.
+
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec27/
+     Format: ![Description](images/lec27/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- Signed and unsigned comparisons can give different answers.

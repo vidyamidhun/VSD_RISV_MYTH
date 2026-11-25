@@ -2,54 +2,32 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+The program counter selects the next instruction to fetch.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
-
-<Explanation in your own words.>
+After reset, the PC starts at the first instruction. RV32I instructions are 4 bytes, so by default:
 
 ```text
-Step 1
-    ↓
-Step 2
+next PC = current PC + 4
 ```
+
+A taken branch or a jump supplies a different target. Instruction memory is often indexed by word, so the two lowest address bits are not part of the index. For an aligned 32-bit instruction, they are 00.
 
 ---
 
-## Lab / Implementation
+## My Lab Work and Results
 
-Command or code:
+**To do:** Show the PC sequence from reset in your waveform.
 
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec23/`, then add a line like this:
-
-    ![Description](images/lec23/screenshot.png)
-
----
-
-## Observations
-
-- <what you saw>
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec23/
+     Format: ![Description](images/lec23/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- The PC counts bytes, so it advances by 4.

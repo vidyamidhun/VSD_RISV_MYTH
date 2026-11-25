@@ -2,54 +2,40 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+Data memory is accessed by loads and stores.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
-
-<Explanation in your own words.>
+For both, the address is:
 
 ```text
-Step 1
-    ↓
-Step 2
+address = rs1 value + sign-extended immediate
 ```
+
+| Signal | Load | Store |
+|---|---|---|
+| Read enable | On for a valid load | Off |
+| Write enable | Off | On for a valid store |
+| Write data | Not used | rs2 value |
+
+A word-indexed memory uses the address bits above the lowest two. A simple test stores a result, loads it into another register and checks that the two match.
+
+A teaching CPU may treat every load and store as a word. Full RV32I also defines byte and halfword accesses.
 
 ---
 
-## Lab / Implementation
+## My Lab Work and Results
 
-Command or code:
+**To do:** Add a store and a load to your test program and update its pass condition.
 
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec32/`, then add a line like this:
-
-    ![Description](images/lec32/screenshot.png)
-
----
-
-## Observations
-
-- <what you saw>
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec32/
+     Format: ![Description](images/lec32/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- Memory enables must include the valid signal.

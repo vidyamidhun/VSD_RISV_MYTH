@@ -2,54 +2,40 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+A RISC-V CPU written in Verilog can run a compiled program in simulation. Icarus Verilog (`iverilog`) is the simulator.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+![Program to simulation flow](../images/diagrams/verification_flow.svg)
 
-<Explanation in your own words.>
+1. Compile the program for RISC-V.
+2. Convert it to a hex file that the testbench can load into memory.
+3. Simulate the CPU and testbench.
+4. Compare the CPU result with the expected result.
 
-```text
-Step 1
-    ↓
-Step 2
-```
-
----
-
-## Lab / Implementation
-
-Command or code:
+The general commands, using your lab's file names:
 
 ```bash
-<your command>
+iverilog -o cpu_sim testbench.v cpu.v
+vvp cpu_sim
 ```
 
-Screenshot: save it in `images/lec13/`, then add a line like this:
-
-    ![Description](images/lec13/screenshot.png)
+The CPU must support every instruction that the compiled program uses.
 
 ---
 
-## Observations
+## My Lab Work and Results
 
-- <what you saw>
+**To do:** Record the script or commands from your lab and the simulation output.
+
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec13/
+     Format: ![Description](images/lec13/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- A testbench loads the program, drives the clock and reset, and checks results.

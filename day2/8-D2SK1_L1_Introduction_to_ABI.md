@@ -2,54 +2,30 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+The Application Binary Interface (ABI) is the set of rules that lets separately compiled code work together.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+It covers how registers are used, how arguments and return values are passed, how the stack is organised and the sizes of data types. A program asks the operating system for services through a **system call**, made in RISC-V with the `ecall` instruction.
 
-<Explanation in your own words.>
+RISC-V has 32 integer registers, `x0` to `x31`. Their width is XLEN, and `x0` always reads as zero. The program counter is separate.
 
-```text
-Step 1
-    ↓
-Step 2
-```
+Register fields in instructions are 5 bits wide, because 2^5 = 32.
 
 ---
 
-## Lab / Implementation
+## My Lab Work and Results
 
-Command or code:
+**To do:** Identify the registers that hold arguments in your disassembly.
 
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec8/`, then add a line like this:
-
-    ![Description](images/lec8/screenshot.png)
-
----
-
-## Observations
-
-- <what you saw>
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec8/
+     Format: ![Description](images/lec8/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- The ISA defines the registers; the ABI agrees how software uses them.

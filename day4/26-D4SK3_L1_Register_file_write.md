@@ -2,54 +2,31 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+The result of an instruction is written back to its destination register.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+Writing is enabled only when:
+- the instruction is valid,
+- it has a destination register, and
+- the destination is not `x0`.
 
-<Explanation in your own words.>
-
-```text
-Step 1
-    ↓
-Step 2
-```
+Stores and conditional branches have no destination register. Writes to `x0` must have no effect, so that it always reads as zero. A register file is an array: the write index chooses which entry changes, while the other entries keep their values.
 
 ---
 
-## Lab / Implementation
+## My Lab Work and Results
 
-Command or code:
+**To do:** Test a write to a normal register and an attempted write to `x0`.
 
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec26/`, then add a line like this:
-
-    ![Description](images/lec26/screenshot.png)
-
----
-
-## Observations
-
-- <what you saw>
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec26/
+     Format: ![Description](images/lec26/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- An incorrect write enable can silently corrupt registers.

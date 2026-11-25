@@ -2,54 +2,35 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+A C program can call an assembly function when both follow the ABI. The loop for 1 to N can be written in assembly.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+![C and assembly function call](../images/diagrams/c_asm_call.svg)
 
-<Explanation in your own words.>
+The algorithm:
+1. Take the start value in `a0` and the limit (N + 1) in `a1`.
+2. Set a running sum and a counter in temporary registers.
+3. Add the counter to the sum, then add 1 to the counter.
+4. Repeat while the counter is less than the limit (`blt`).
+5. Put the sum in `a0` and return with `ret`.
 
-```text
-Step 1
-    ↓
-Step 2
-```
-
----
-
-## Lab / Implementation
-
-Command or code:
-
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec11/`, then add a line like this:
-
-    ![Description](images/lec11/screenshot.png)
+In C, declare the function with `extern` so the compiler knows its arguments and return type.
 
 ---
 
-## Observations
+## My Lab Work and Results
 
-- <what you saw>
+**To do:** Write your own assembly function from these steps and add it to `src/`.
+
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec11/
+     Format: ![Description](images/lec11/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- `a0` carries the first argument and the return value.

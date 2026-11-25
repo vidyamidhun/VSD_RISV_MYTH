@@ -2,54 +2,32 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+A testbench checks whether the CPU gives the expected result.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+A self-checking test:
+1. Load a program whose result is known, such as a sum of integers.
+2. Wait for the result to reach a chosen register.
+3. Set `*passed` when it matches the expected value.
+4. Set `*failed` if the simulation runs too long.
 
-<Explanation in your own words.>
-
-```text
-Step 1
-    ↓
-Step 2
-```
+A cycle limit stops a faulty design from appearing to run for ever. Passing one program does not prove every instruction works, so test different cases.
 
 ---
 
-## Lab / Implementation
+## My Lab Work and Results
 
-Command or code:
+**To do:** Record your pass condition and the simulation log.
 
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec22/`, then add a line like this:
-
-    ![Description](images/lec22/screenshot.png)
-
----
-
-## Observations
-
-- <what you saw>
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec22/
+     Format: ![Description](images/lec22/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- Decide the expected result before running the test.

@@ -2,54 +2,30 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+A single-value memory lets a calculator save a result and use it later, like the memory keys on a handheld calculator.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+It needs two actions:
+- **Store:** copy the current result into the memory.
+- **Recall:** select the stored value as the calculator output.
 
-<Explanation in your own words.>
-
-```text
-Step 1
-    ↓
-Step 2
-```
+The memory must hold its value in every other cycle and clear on reset. In logic, this is a chain of choices: reset, then store, then keep the previous value. Extend the operation select to cover the new actions.
 
 ---
 
-## Lab / Implementation
+## My Lab Work and Results
 
-Command or code:
+**To do:** Write the memory logic yourself and show a store followed by a recall.
 
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec19/`, then add a line like this:
-
-    ![Description](images/lec19/screenshot.png)
-
----
-
-## Observations
-
-- <what you saw>
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec19/
+     Format: ![Description](images/lec19/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- State must say what happens when it is not being updated.

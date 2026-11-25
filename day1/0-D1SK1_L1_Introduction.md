@@ -2,54 +2,38 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+RISC-V is an open instruction set architecture (ISA). This page introduces the words used throughout the workshop.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+| Term | Meaning |
+|---|---|
+| ISA | The agreement between software and hardware: instructions, registers and how they behave |
+| RISC | Reduced Instruction Set Computer, a design style built on simple, regular instructions |
+| Microarchitecture | One particular hardware implementation of an ISA |
+| XLEN | Width of an integer register: 32 bits in RV32, 64 bits in RV64 |
+| RV32I / RV64I | The base integer instruction sets |
+| Extension | An optional group of instructions added to a base ISA |
 
-<Explanation in your own words.>
+Common extensions are **M** (multiply and divide), **A** (atomics), **F** and **D** (single and double precision floating point) and **C** (compressed 16-bit instructions). For example, RV64IMAC is the 64-bit base with the M, A and C extensions.
 
-```text
-Step 1
-    ↓
-Step 2
-```
-
----
-
-## Lab / Implementation
-
-Command or code:
-
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec0/`, then add a line like this:
-
-    ![Description](images/lec0/screenshot.png)
+A **pseudo-instruction** is a convenient assembly name that the assembler turns into real instructions. `mv a0, a1` becomes `addi a0, a1, 0`.
 
 ---
 
-## Observations
+## My Lab Work and Results
 
-- <what you saw>
+**To do:** Note the ISA string used in your toolchain labs and explain each letter.
+
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec0/
+     Format: ![Description](images/lec0/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- The ISA says what a processor does; the microarchitecture says how.
+- RISC-V has a small base that extensions build on.

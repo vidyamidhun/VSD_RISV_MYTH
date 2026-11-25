@@ -2,54 +2,33 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+The register file supplies operands, and the arithmetic logic unit (ALU) works on them.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+RV32I has 32 registers of 32 bits. A typical CPU register file has two read ports, for `rs1` and `rs2`, and one write port, for `rd`.
 
-<Explanation in your own words.>
+Reading is enabled only when the instruction uses that source. The ALU selects a result according to the decoded instruction:
 
-```text
-Step 1
-    ↓
-Step 2
-```
-
----
-
-## Lab / Implementation
-
-Command or code:
-
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec25/`, then add a line like this:
-
-    ![Description](images/lec25/screenshot.png)
+| Instruction | Result |
+|---|---|
+| `add` | rs1 value + rs2 value |
+| `addi` | rs1 value + immediate |
 
 ---
 
-## Observations
+## My Lab Work and Results
 
-- <what you saw>
+**To do:** Show register reads and the ALU result for one `add` and one `addi`.
+
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec25/
+     Format: ![Description](images/lec25/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- Two read ports let both operands be read together.

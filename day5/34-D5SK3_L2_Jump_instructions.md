@@ -2,54 +2,31 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+Jumps always change the flow of control.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+| Instruction | Target | Value written to rd |
+|---|---|---|
+| `jal` | jump PC + J immediate | jump PC + 4 |
+| `jalr` | (rs1 value + I immediate), with bit 0 cleared | jump PC + 4 |
 
-<Explanation in your own words.>
-
-```text
-Step 1
-    ↓
-Step 2
-```
+In a pipeline, instructions fetched from the wrong path must be invalidated, as for a taken branch. `jalr` depends on a register, so it needs the correct (possibly bypassed) value. A function return, `ret`, is `jalr x0, 0(ra)`.
 
 ---
 
-## Lab / Implementation
+## My Lab Work and Results
 
-Command or code:
+**To do:** Test both jumps and check the return address and target.
 
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec34/`, then add a line like this:
-
-    ![Description](images/lec34/screenshot.png)
-
----
-
-## Observations
-
-- <what you saw>
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec34/
+     Format: ![Description](images/lec34/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- The link value lets a program return to the caller.

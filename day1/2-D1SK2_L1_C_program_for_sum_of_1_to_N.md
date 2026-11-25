@@ -2,54 +2,45 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+A short C loop that adds the integers from 1 to N is a simple first program for exploring the toolchain.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+```c
+#include <stdio.h>
 
-<Explanation in your own words.>
-
-```text
-Step 1
-    ↓
-Step 2
+int main(void) {
+    int n = 10, sum = 0;
+    for (int i = 1; i <= n; i++)
+        sum += i;
+    printf("Sum of 1 to %d is %d\n", n, sum);
+    return 0;
+}
 ```
 
----
+The result can be checked with the formula N(N + 1) / 2. For N = 10, this is 55.
 
-## Lab / Implementation
-
-Command or code:
+First compile and run it with the host compiler, so that you have a reference result:
 
 ```bash
-<your command>
+gcc sum1ton.c -o sum1ton
+./sum1ton
 ```
-
-Screenshot: save it in `images/lec2/`, then add a line like this:
-
-    ![Description](images/lec2/screenshot.png)
 
 ---
 
-## Observations
+## My Lab Work and Results
 
-- <what you saw>
+**To do:** Run the program for your own value of N and attach the code and output.
+
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec2/
+     Format: ![Description](images/lec2/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- A reference result makes later RISC-V runs easy to check.

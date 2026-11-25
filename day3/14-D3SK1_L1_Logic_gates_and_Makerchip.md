@@ -2,54 +2,33 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+Combinational logic has outputs that depend only on the present inputs. Makerchip is a browser-based IDE for TL-Verilog.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+| Gate | TL-Verilog expression |
+|---|---|
+| NOT | `$out = ! $in1;` |
+| AND | `$out = $in1 && $in2;` |
+| OR | `$out = $in1 \|\| $in2;` |
+| XOR | `$out = $in1 ^ $in2;` |
 
-<Explanation in your own words.>
-
-```text
-Step 1
-    ↓
-Step 2
-```
-
----
-
-## Lab / Implementation
-
-Command or code:
-
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec14/`, then add a line like this:
-
-    ![Description](images/lec14/screenshot.png)
+In TL-Verilog, signals start with `$` and do not need a separate declaration. Makerchip shows the generated diagram, waveforms and any visualisation.
 
 ---
 
-## Observations
+## My Lab Work and Results
 
-- <what you saw>
+**To do:** Build each gate in Makerchip and attach the waveforms.
+
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec14/
+     Format: ![Description](images/lec14/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- Combinational logic has no memory.

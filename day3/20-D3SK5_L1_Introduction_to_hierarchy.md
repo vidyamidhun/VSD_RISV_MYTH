@@ -2,54 +2,33 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+Hierarchy builds a larger design from smaller, repeated blocks.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+TL-Verilog can replicate logic with a bracketed range:
 
-<Explanation in your own words.>
-
-```text
-Step 1
-    ↓
-Step 2
+```tlv
+/lane[3:0]
+   $sum[8:0] = $a[7:0] + $b[7:0];
 ```
+
+This creates four copies, each with its own signals. Behavioural hierarchy keeps repeated structures compact. A register file is a useful example: many entries share the same logic.
 
 ---
 
-## Lab / Implementation
+## My Lab Work and Results
 
-Command or code:
+**To do:** Create a small replicated block and view its diagram.
 
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec20/`, then add a line like this:
-
-    ![Description](images/lec20/screenshot.png)
-
----
-
-## Observations
-
-- <what you saw>
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec20/
+     Format: ![Description](images/lec20/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- Replication avoids writing the same logic many times.

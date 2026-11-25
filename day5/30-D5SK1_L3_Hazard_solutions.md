@@ -2,54 +2,30 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+The usual solutions are to wait, to forward results or to cancel wrong instructions.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+- **Stall:** hold a dependent instruction until its data is ready.
+- **Register bypass (forwarding):** if an earlier instruction is writing the register now being read, send the ALU result directly to the operand. The check needs a valid register write and matching register numbers.
+- **Branch squash:** continue fetching in sequence, and if a branch is taken, redirect the PC and mark the wrong-path instructions invalid.
 
-<Explanation in your own words.>
-
-```text
-Step 1
-    ↓
-Step 2
-```
+The number of earlier cycles to check or cancel follows from the stage in which each result becomes available.
 
 ---
 
-## Lab / Implementation
+## My Lab Work and Results
 
-Command or code:
+**To do:** Compare the waveforms before and after adding your bypass and branch handling.
 
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec30/`, then add a line like this:
-
-    ![Description](images/lec30/screenshot.png)
-
----
-
-## Observations
-
-- <what you saw>
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec30/
+     Format: ![Description](images/lec30/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- A cancelled instruction must not change registers, memory or the PC.

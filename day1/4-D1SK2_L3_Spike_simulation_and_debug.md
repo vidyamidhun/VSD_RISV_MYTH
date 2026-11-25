@@ -2,54 +2,38 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+Spike is a RISC-V ISA simulator. With the proxy kernel (`pk`), it can run a compiled program and step through it.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
-
-<Explanation in your own words.>
-
-```text
-Step 1
-    ↓
-Step 2
-```
-
----
-
-## Lab / Implementation
-
-Command or code:
-
 ```bash
-<your command>
+spike pk sum1ton.o          # run the program
+spike -d pk sum1ton.o       # start the interactive debugger
 ```
 
-Screenshot: save it in `images/lec4/`, then add a line like this:
+| Debugger command | Action |
+|---|---|
+| `until pc 0 <address>` | Run core 0 until the program counter reaches the address |
+| `reg 0 a0` | Show register a0 of core 0 |
+| Enter | Execute one instruction |
+| `q` | Quit |
 
-    ![Description](images/lec4/screenshot.png)
+Take the address of `main` from your own disassembly. Check a register before and after an instruction to confirm what it changed.
 
 ---
 
-## Observations
+## My Lab Work and Results
 
-- <what you saw>
+**To do:** Show that Spike gives the same output as the host run, then trace two instructions and note the register changes.
+
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec4/
+     Format: ![Description](images/lec4/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- Simulation checks software behaviour without RISC-V hardware.

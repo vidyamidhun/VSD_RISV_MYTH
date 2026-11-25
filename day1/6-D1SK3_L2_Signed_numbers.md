@@ -2,54 +2,37 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+RISC-V represents signed integers in two's complement.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+The most significant bit has a negative weight, -2^(N-1). All other bits keep their positive weights.
 
-<Explanation in your own words.>
+To negate a number, invert every bit and add 1. In 8 bits:
 
 ```text
-Step 1
-    ↓
-Step 2
+ 5      = 0000 0101
+ invert = 1111 1010
+ add 1  = 1111 1011  = -5
 ```
+
+The range is -2^(N-1) to 2^(N-1) - 1, which is -128 to 127 for 8 bits. The same adder works for both signed and unsigned values.
 
 ---
 
-## Lab / Implementation
+## My Lab Work and Results
 
-Command or code:
+**To do:** Convert two negative numbers by hand and check them with a program.
 
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec6/`, then add a line like this:
-
-    ![Description](images/lec6/screenshot.png)
-
----
-
-## Observations
-
-- <what you saw>
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec6/
+     Format: ![Description](images/lec6/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- The top bit tells the sign.
+- There is one more negative value than positive.

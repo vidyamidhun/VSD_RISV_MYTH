@@ -2,54 +2,32 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+A multiplexer (mux) selects one of several inputs. It is the basis of a simple calculator.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+A two-input mux:
 
-<Explanation in your own words.>
-
-```text
-Step 1
-    ↓
-Step 2
+```tlv
+$out[7:0] = $sel ? $in1[7:0] : $in0[7:0];
 ```
+
+For more choices, conditions can be chained. A calculator computes sum, difference, product and quotient, then uses a 2-bit operation select to choose one result with a 4:1 mux.
 
 ---
 
-## Lab / Implementation
+## My Lab Work and Results
 
-Command or code:
+**To do:** Build your calculator and test all four operations.
 
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec15/`, then add a line like this:
-
-    ![Description](images/lec15/screenshot.png)
-
----
-
-## Observations
-
-- <what you saw>
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec15/
+     Format: ![Description](images/lec15/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- A chained conditional gives priority to the first true condition.

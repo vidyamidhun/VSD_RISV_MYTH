@@ -2,54 +2,32 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+Sequential logic stores state, which changes on a clock edge. D flip-flops are the basic storage element.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+In TL-Verilog, `>>1$signal` means the value of the signal one cycle earlier. A free-running counter:
 
-<Explanation in your own words.>
-
-```text
-Step 1
-    ↓
-Step 2
+```tlv
+$cnt[7:0] = $reset ? 0 : >>1$cnt + 1;
 ```
+
+Reset gives the state a known starting value. A sequential calculator feeds its previous output back as one operand.
 
 ---
 
-## Lab / Implementation
+## My Lab Work and Results
 
-Command or code:
+**To do:** Extend your calculator so it uses the previous result, and attach the waveform.
 
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec16/`, then add a line like this:
-
-    ![Description](images/lec16/screenshot.png)
-
----
-
-## Observations
-
-- <what you saw>
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec16/
+     Format: ![Description](images/lec16/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- Feedback through a flip-flop gives a circuit memory.

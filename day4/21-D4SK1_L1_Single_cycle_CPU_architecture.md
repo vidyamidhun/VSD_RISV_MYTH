@@ -2,54 +2,36 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+A single-cycle CPU completes one instruction in each clock cycle.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+![Single-cycle CPU datapath](../images/diagrams/cpu_datapath.svg)
 
-<Explanation in your own words.>
-
-```text
-Step 1
-    ↓
-Step 2
-```
-
----
-
-## Lab / Implementation
-
-Command or code:
-
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec21/`, then add a line like this:
-
-    ![Description](images/lec21/screenshot.png)
+| Block | Role |
+|---|---|
+| Program counter (PC) | Holds the address of the instruction |
+| Instruction memory | Supplies the instruction at that address |
+| Decoder | Finds the operation, registers and immediate |
+| Register file | Reads two source registers and writes one destination |
+| ALU | Computes results |
+| Branch logic | Chooses the next PC |
+| Data memory | Serves loads and stores |
 
 ---
 
-## Observations
+## My Lab Work and Results
 
-- <what you saw>
+**To do:** Add the diagram of your own CPU from Makerchip.
+
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec21/
+     Format: ![Description](images/lec21/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- A single cycle must be long enough for the slowest instruction.

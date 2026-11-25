@@ -2,54 +2,32 @@
 
 ## Overview
 
-This lecture introduces <topic>.
-
-The lecture explains:
-- <point>
-- <point>
-
----
-
-## Objectives
-
-- <objective>
+In a pipelined CPU, several instructions are in progress at once. A hazard occurs when one cannot safely proceed as planned.
 
 ---
 
 ## Key Concepts
 
-### <Concept name>
+![Pipeline overlap and hazard](../images/diagrams/pipeline_hazard.svg)
 
-<Explanation in your own words.>
+- **Data hazard:** an instruction needs a result that is not yet available. In a **read-after-write** case, it reads a register that an earlier instruction has not yet written.
+- **Control hazard:** the CPU fetches more instructions before it knows where a branch or jump goes.
+- **Structural hazard:** two instructions need the same hardware at once.
 
-```text
-Step 1
-    ↓
-Step 2
-```
+Which hazards occur, and how many cycles they cost, depends on the pipeline design.
 
 ---
 
-## Lab / Implementation
+## My Lab Work and Results
 
-Command or code:
+**To do:** Identify a dependent instruction pair in your test program.
 
-```bash
-<your command>
-```
-
-Screenshot: save it in `images/lec28/`, then add a line like this:
-
-    ![Description](images/lec28/screenshot.png)
-
----
-
-## Observations
-
-- <what you saw>
+<!-- Add your own code, observations and screenshots here.
+     Screenshot folder: images/lec28/
+     Format: ![Description](images/lec28/screenshot.png) -->
 
 ---
 
 ## Summary
 
-- <key takeaway>
+- Pipelining creates overlap, and overlap creates dependencies.
