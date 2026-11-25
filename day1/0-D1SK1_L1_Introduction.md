@@ -43,7 +43,6 @@ It was set with the compiler option `-march=rv64i`.
 
 In RV64I, registers are 64 bits wide, but the standard instructions are still 32 bits (4 bytes) long.
 
-**Related option:** `-mabi=lp64` selects the ABI and is not part of the ISA string. With `lp64`, `long` and pointers are 64 bits, `int` is 32 bits, and floating-point values are not passed in floating-point registers.
 ---
 
 ## Summary
