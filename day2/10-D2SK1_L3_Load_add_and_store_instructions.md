@@ -26,13 +26,6 @@ The 12-bit offset is signed, from -2048 to 2047.
 
 ---
 
-## My Lab Work and Results
-
-**To do:** Write the three instructions for different array indexes.
-
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec10/
-     Format: ![Description](images/lec10/screenshot.png) -->
 
 ---
 
