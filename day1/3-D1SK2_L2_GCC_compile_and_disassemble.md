@@ -28,10 +28,36 @@ In `less`, type `/<main>:` to find the main function. Each RV64I instruction is 
 ## My Lab Work and Results
 
 **To do:** Compare the instruction count of `main` with `-O1` and `-Ofast`. Record what you see.
+### Commands Used
 
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec3/
-     Format: ![Description](images/lec3/screenshot.png) -->
+```bash
+riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o sum1ton_O1.o sum1ton.c
+riscv64-unknown-elf-objdump -d sum1ton_O1.o | less
+
+riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum1ton_Ofast.o sum1ton.c
+riscv64-unknown-elf-objdump -d sum1ton_Ofast.o | less
+```
+
+### Disassembly with -O1
+
+![Disassembly of main with O1](images/lec3/1.png)
+
+### Disassembly with -Ofast
+
+![Disassembly of main with Ofast](images/lec3/2.png)
+
+### Comparison
+
+| Setting | Instructions in `main` |
+|---|---|
+| `-O1` | <your count> |
+| `-Ofast` | <your count> |
+
+### Observations
+
+- <Are the counts the same or different?>
+- <Do you see a loop, or is the sum loaded directly as a constant?>
+- <Is the order of the instructions the same?>
 
 ---
 
