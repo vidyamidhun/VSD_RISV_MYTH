@@ -29,11 +29,29 @@ The tool creates the flip-flops between stages. Moving logic to another stage (*
 
 ## My Lab Work and Results
 
-**To do:** Pipeline your calculator, then compare the waveforms before and after moving logic between stages.
+### 1. Error Conditions in a Computation Pipeline
 
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec17/
-     Format: ![Description](images/lec17/screenshot.png) -->
+```tlv
+|comp
+   @1
+      $err1 = $bad_input || $illegal_op;
+   @3
+      $err2 = $err1 || $over_flow;
+   @6
+      $err3 = $err2 || $div_by_zero;
+```
+
+The error inputs are left unassigned, so Makerchip supplies random test values. TL-Verilog creates the flip-flops that carry `$err1` and `$err2` to later stages.
+
+#### Block Diagram
+
+![Error-condition pipeline diagram](images/lec17/2.png)
+
+#### Waveform
+
+![Waveform of the pipeline error signals](images/lec17/3.png)
+
+**Result:** In the cycles checked, the error signals combined the earlier errors, after the pipeline delay, with the error condition added at that stage.
 
 ---
 
