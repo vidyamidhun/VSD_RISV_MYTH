@@ -20,11 +20,41 @@ Reset gives the state a known starting value. A sequential calculator feeds its 
 
 ## My Lab Work and Results
 
-**To do:** Extend your calculator so it uses the previous result, and attach the waveform.
+### TL-Verilog Code
 
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec16/
-     Format: ![Description](images/lec16/screenshot.png) -->
+```tlv
+$reset = *reset;
+
+// Previous result is fed back as the first input
+$val1[31:0] = >>1$out;
+$val2[31:0] = $rand2[3:0];
+
+$sum[31:0]  = $val1 + $val2;
+$diff[31:0] = $val1 - $val2;
+$prod[31:0] = $val1 * $val2;
+$quot[31:0] = ($val2 == 32'd0) ? 32'd0 : $val1 / $val2;
+
+// Reset has priority, then $op selects the operation
+$out[31:0] = $reset              ? 32'b0 :
+             ($op[1:0] == 2'b00) ? $sum  :
+             ($op[1:0] == 2'b01) ? $diff :
+             ($op[1:0] == 2'b10) ? $prod :
+                                   $quot;
+
+`BOGUS_USE($out)
+```
+
+### Block Diagram
+
+![Makerchip diagram of the sequential calculator](images/lec16/1.png)
+
+### Waveform
+
+![Waveform of the sequential calculator](images/lec16/2.png)
+
+### Result
+
+In the tested cycles, the output was 0 during reset. After reset, the previous output was used as the first operand, and the selected operation gave the expected result.
 
 ---
 
