@@ -1,31 +1,77 @@
-# 19-D3SK4_L2_Calculator_with_memory
+# 18-D3SK4_L1_Validity_lab
 
 ## Overview
 
-A single-value memory lets a calculator save a result and use it later, like the memory keys on a handheld calculator.
+Validity marks the cycles in which a pipeline carries meaningful data.
 
 ---
 
 ## Key Concepts
 
-It needs two actions:
-- **Store:** copy the current result into the memory.
-- **Recall:** select the stored value as the calculator output.
+A `?$valid` condition applies to the logic inside it. Values in invalid cycles are treated as don't-care.
 
-The memory must hold its value in every other cycle and clear on reset. In logic, this is a chain of choices: reset, then store, then keep the previous value. Extend the operation select to cover the new actions.
+Benefits:
+- Waveforms are easier to debug.
+- Mistakes that use invalid data are easier to find.
+- Clocks can be gated for idle logic, which can save power.
 
 ---
 
 ## My Lab Work and Results
 
-**To do:** Write the memory logic yourself and show a store followed by a recall.
+### 2-Cycle Calculator with Validity
 
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec19/
-     Format: ![Description](images/lec19/screenshot.png) -->
+- A 1-bit counter makes `$valid` high every second cycle after reset.
+- The calculator logic is enabled by `$valid_or_reset`, so it also works during reset.
+- The four operations are in stage `@1`.
+- The output multiplexer is in stage `@2`.
+- `>>2$out` feeds the result from two cycles earlier back to `$val1`.
+- Because `$out` is computed under the validity condition, the multiplexer only needs `$reset` to force zero.
+
+### TL-Verilog Code
+
+```tlv
+|calc
+   @1
+      $reset = *reset;
+
+      $valid = $reset ? 1'b0 : >>1$valid + 1'b1;
+      $valid_or_reset = $valid || $reset;
+
+   ?$valid_or_reset
+      @1
+         $val1[31:0] = >>2$out;
+         $val2[31:0] = $rand2[3:0];
+
+         $sum[31:0]  = $val1 + $val2;
+         $diff[31:0] = $val1 - $val2;
+         $prod[31:0] = $val1 * $val2;
+         $quot[31:0] = ($val2 == 32'd0) ? 32'd0 : $val1 / $val2;
+
+      @2
+         $out[31:0] = $reset              ? 32'b0 :
+                      ($op[1:0] == 2'b00) ? $sum  :
+                      ($op[1:0] == 2'b01) ? $diff :
+                      ($op[1:0] == 2'b10) ? $prod :
+                                            $quot;
+
+         `BOGUS_USE($out)
+```
+
+### Block Diagram
+
+![Makerchip diagram of the 2-cycle calculator with validity](images/lec18/1.png)
+
+### Waveform
+
+![Waveform of the 2-cycle calculator with validity](images/lec18/2.png)
+
+### Result
+
+In the cycles checked, the output was 0 during reset. After reset, `$valid` was high every second cycle. In each valid cycle, the calculator used the previous result and gave the expected output.
 
 ---
 
 ## Summary
 
-- State must say what happens when it is not being updated.
+- A valid signal separates real data from don't-care cycles.
