@@ -26,10 +26,38 @@ Unsigned arithmetic in C wraps around modulo 2^N. In 8 bits, 255 + 1 gives 0.
 
 **To do:** Print the largest `unsigned long long int` value from a C program.
 
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec5/
-     Format: ![Description](images/lec5/screenshot.png) -->
+## My Lab Work and Results
 
+### C Program
+
+```c
+#include <stdio.h>
+#include <limits.h>
+
+int main(void) {
+    unsigned long long int max = ULLONG_MAX;
+    printf("Largest unsigned long long int = %llu\n", max);
+    return 0;
+}
+```
+
+### Commands Used
+
+```bash
+riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o unsigned_max.o unsigned_max.c
+spike pk unsigned_max.o
+```
+
+
+![Spike output showing the largest unsigned long long value](images/lec4/1.png)
+
+### Observations
+
+- The largest `unsigned long long int` value here is `18446744073709551615`.
+- It is 64 bits wide, so its range is 0 to 2^64 - 1.
+- At the largest value, all 64 bits are 1.
+- `ULLONG_MAX` from `limits.h` gives this value, and `%llu` prints it.
+- Adding 1 to this unsigned value wraps it around to 0. This program does not test that.
 ---
 
 ## Summary
