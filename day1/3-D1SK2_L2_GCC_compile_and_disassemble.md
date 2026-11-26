@@ -40,11 +40,11 @@ riscv64-unknown-elf-objdump -d sum1ton_Ofast.o | less
 
 ### Disassembly with -O1
 
-![Disassembly of main with O1](images/lec3/1.png)
+![Disassembly of main with O1](images/lec2/1.png)
 
 ### Disassembly with -Ofast
 
-![Disassembly of main with Ofast](images/lec3/2.png)
+![Disassembly of main with Ofast](images/lec2/2.png)
 
 ### Comparison
 
