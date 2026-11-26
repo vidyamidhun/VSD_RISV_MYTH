@@ -19,16 +19,6 @@ This creates four copies, each with its own signals. Behavioural hierarchy keeps
 
 ---
 
-## My Lab Work and Results
-
-**To do:** Create a small replicated block and view its diagram.
-
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec20/
-     Format: ![Description](images/lec20/screenshot.png) -->
-
----
-
 ## Summary
 
 - Replication avoids writing the same logic many times.
