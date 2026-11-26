@@ -56,7 +56,7 @@ chmod 777 rv32im.sh
 
 ### Output
 
-![Output of the iverilog simulation](images/lec13/1.png)
+![Output of the iverilog simulation](images/lec13/2.png)
 
 ```text
 Sum of number from 1 to 2 is 3
