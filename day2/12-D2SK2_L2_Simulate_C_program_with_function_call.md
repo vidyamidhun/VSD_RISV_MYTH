@@ -20,16 +20,6 @@ In the disassembly, check that the arguments are loaded into `a0` and `a1` befor
 
 ---
 
-## My Lab Work and Results
-
-**To do:** Attach your program output and the disassembly of the caller and the function.
-
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec12/
-     Format: ![Description](images/lec12/screenshot.png) -->
-
----
-
 ## Summary
 
 - The linker joins the C and assembly code into one program.
