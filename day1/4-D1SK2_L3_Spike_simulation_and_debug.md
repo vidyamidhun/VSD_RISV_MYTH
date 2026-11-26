@@ -30,39 +30,24 @@ Take the address of `main` from your own disassembly. Check a register before an
 
 ## My Lab Work and Results
 
-### Commands Used
+## My Lab Work and Results
 
-```bash
-riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o sum1ton_O1.o sum1ton.c
-riscv64-unknown-elf-objdump -d sum1ton_O1.o | less
+**To do:** Show that Spike gives the same output as the host run, then trace two instructions and note the register changes.
 
-riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum1ton_Ofast.o sum1ton.c
-riscv64-unknown-elf-objdump -d sum1ton_Ofast.o | less
-```
+### Spike Boot Sequence
 
-### Disassembly with -O1
+![Spike boot sequence before reaching main](images/lec3/2.png)
 
-![Disassembly of main with O1](images/lec3/1.png)
+### What This Shows
 
-### Disassembly with -Ofast
-
-![Disassembly of main with Ofast](images/lec3/2.png)
-
-### Comparison
-
-| Setting | Address of `main` | Instructions in `main` |
-|---|---|---|
-| `-O1` | `0x10184` | 11 |
-| `-Ofast` | `0x100b0` | 11 |
-
-### Observations
-
-- Both settings give 11 instructions in `main`.
-- Neither version has a summing loop in `main`. `li a2,55` loads the result directly, so the sum was calculated during compilation.
-- The instruction order differs. `-Ofast` places `lui a0,0x21` first and moves `sd ra,8(sp)` later.
-- `main` is at a different address in the two programs.
-- For this program, `-Ofast` did not reduce the instruction count.
----
+- Spike executes one instruction each time Enter is pressed on an empty line.
+- Each instruction line shows the core number, address (PC), machine code and assembly instruction.
+- The trace begins at `0x1000` in boot code, not at `main`.
+- `auipc t0, 0x0` places `0x1000` in `t0`.
+- `addi a1, t0, 32` places `0x1020` in `a1`.
+- `csrr a0, mhartid` reads the hardware thread ID into `a0`.
+- `ld t0, 24(t0)` loads a jump address, and `jr t0` jumps to it. The next instruction is at `0x80000000`.
+- In `do_reset`, the proxy kernel starts setting registers such as `ra`, `sp`, `gp` and `tp` to zero.
 
 ## Summary
 
