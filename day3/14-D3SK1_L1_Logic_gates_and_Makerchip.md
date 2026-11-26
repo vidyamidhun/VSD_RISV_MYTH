@@ -15,17 +15,7 @@ Combinational logic has outputs that depend only on the present inputs. Makerchi
 | OR | `$out = $in1 \|\| $in2;` |
 | XOR | `$out = $in1 ^ $in2;` |
 
-In TL-Verilog, signals start with `$` and do not need a separate declaration. Makerchip shows the generated diagram, waveforms and any visualisation.
-
----
-
-## My Lab Work and Results
-
-**To do:** Build each gate in Makerchip and attach the waveforms.
-
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec14/
-     Format: ![Description](images/lec14/screenshot.png) -->
+In TL-Verilog, signals start with `$` and do not need a separate declaration. Makerchip shows the generated diagram, waveforms and any visualisation
 
 ---
 
