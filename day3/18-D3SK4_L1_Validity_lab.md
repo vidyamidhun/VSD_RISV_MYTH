@@ -26,18 +26,8 @@ Benefits:
 
 To **accumulate** a total, keep the previous value when the cycle is invalid and add the new value when it is valid.
 
----
 
-## My Lab Work and Results
-
-**To do:** Add validity to your calculator or distance pipeline, including an accumulated total.
-
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec18/
-     Format: ![Description](images/lec18/screenshot.png) -->
-
----
-
+------
 ## Summary
 
 - A valid signal separates real data from don't-care cycles.
