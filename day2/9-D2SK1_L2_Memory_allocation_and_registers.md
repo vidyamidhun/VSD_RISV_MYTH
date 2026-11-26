@@ -27,15 +27,7 @@ Consecutive doublewords are 8 addresses apart. Element `A[i]` of a doubleword ar
 
 ---
 
-## My Lab Work and Results
 
-**To do:** Work out the address of `A[3]` for a base address of your choice.
-
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec9/
-     Format: ![Description](images/lec9/screenshot.png) -->
-
----
 
 ## Summary
 
