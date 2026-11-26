@@ -28,9 +28,19 @@ Take the address of `main` from your own disassembly. Check a register before an
 
 **To do:** Show that Spike gives the same output as the host run, then trace two instructions and note the register changes.
 
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec4/
-     Format: ![Description](images/lec4/screenshot.png) -->
+### Disassembly with -O1
+
+![Disassembly of main with O1](images/lec3/1.png)
+
+| Setting | Instructions in `main` |
+|---|---|
+| `-O1` | 11 |
+
+### Observations
+
+- `main` starts at address `0x10184` and ends with `ret` at `0x101ac`, giving 11 instructions.
+- No summing loop appears in `main`. `li a2,55` loads the result directly, which shows the compiler calculated the sum during compilation.
+- `li a1,10` loads the value of N for `printf`.
 
 ---
 
