@@ -46,19 +46,6 @@ riscv64-unknown-elf-objdump -d sum1ton_Ofast.o | less
 
 ![Disassembly of main with Ofast](images/lec2/2.png)
 
-### Comparison
-
-| Setting | Instructions in `main` |
-|---|---|
-| `-O1` | <your count> |
-| `-Ofast` | <your count> |
-
-### Observations
-
-- <Are the counts the same or different?>
-- <Do you see a loop, or is the sum loaded directly as a constant?>
-- <Is the order of the instructions the same?>
-
 ---
 
 ## Summary
