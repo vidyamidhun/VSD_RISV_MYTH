@@ -16,15 +16,7 @@ Register fields in instructions are 5 bits wide, because 2^5 = 32.
 
 ---
 
-## My Lab Work and Results
 
-**To do:** Identify the registers that hold arguments in your disassembly.
-
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec8/
-     Format: ![Description](images/lec8/screenshot.png) -->
-
----
 
 ## Summary
 
