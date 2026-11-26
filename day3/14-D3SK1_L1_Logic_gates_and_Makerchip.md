@@ -45,11 +45,11 @@ The inputs `$in1` and `$in2` are left unassigned, so Makerchip supplies random t
 
 ### Block Diagram
 
-![Makerchip diagram of the logic gates](images/lec14/1.png)
+![Makerchip diagram of the logic gates](images/lec14/2.png)
 
 ### Waveform
 
-![Waveform of the logic gate inputs and outputs](images/lec14/2.png)
+![Waveform of the logic gate inputs and outputs](images/lec14/1.png)
 
 ### Truth Table
 
