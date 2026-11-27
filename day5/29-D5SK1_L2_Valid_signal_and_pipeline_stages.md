@@ -48,7 +48,21 @@ $valid = $reset ? 1'b0 :
 
 ### Valid waveform
 
-Pending.
+![Waveform showing a valid pulse every third cycle](images/lec29/2.png)
+
+`@0$valid` (bottom row) is high for one cycle in every three. Counting from PC 0 at cycle 0, the first pulses in this view are:
+
+| Cycle | `@0$pc` | `$valid` |
+|---|---|---|
+| 3 | `0x0c` | 1 |
+| 4–5 | `0x10`, `0x14` | 0 |
+| 6 | `0x18` | 1 |
+| 7–8 | `0x10`, `0x14` | 0 |
+| 9 | `0x18` | 1 |
+
+The PC and registers still change every cycle because `$valid` does not control the CPU yet.
+
+**`$start` pulse at cycle 0:** Pending. This view begins after cycle 0.
 
 ---
 
