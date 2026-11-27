@@ -57,7 +57,21 @@ Cycle 0 is the first cycle after reset.
 
 In cycle 3, `add x14, x10, x0` reads `x10` while the previous instruction is writing 0 to it. The register file still gives the old value, 10. The bypass supplies the new value, 0.
 
-**Load redirect waveform and simulation log:** Pending.
+### Waveform: load shadow
+
+![Waveform showing the load shadow](images/lec32/1.png)
+
+This waveform comes from the later [lec32 code](../src/lec32_load_store.tlv). It adds a store and data memory, and its load is at PC `0x24`. It uses the same `$valid` and `$valid_load` logic.
+
+At the right end of the waveform:
+
+| Observation | Waveform |
+|---|---|
+| A valid load reaches `@3` | `@3$valid_load` is 1 for one cycle |
+| The two instructions after the load are cancelled | `@3$valid` is 0 for the next two cycles |
+| Valid instructions resume | `@3$valid` returns to 1 after those two cycles |
+
+**PC value during the redirect and simulation log:** Pending. The PC values cannot be read at this zoom level.
 
 ### Makerchip diagram
 

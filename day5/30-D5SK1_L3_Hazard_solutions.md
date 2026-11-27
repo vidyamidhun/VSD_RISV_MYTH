@@ -69,6 +69,48 @@ In this early part of the run, `$raw_rs1` pulses for the instructions at PC `0x0
 
 ![3-cycle CPU diagram](images/lec30/3.png)
 
+### One instruction every cycle: register bypass and branch squash
+
+The next version starts an instruction every cycle, with logic in `@1`, `@2` and `@3`.
+
+Code: [lec30_branch_squash.tlv](../src/lec30_branch_squash.tlv)
+
+```tlv
+$valid = ! $reset && ! (>>1$valid_taken_br || >>2$valid_taken_br);
+
+$pc[31:0] = >>1$reset          ? 32'd0 :
+            >>3$valid_taken_br ? >>3$br_tgt_pc :
+                                 >>1$inc_pc;
+```
+
+```tlv
+$bypass_rs1 = $rf_rd_en1 && >>1$rf_wr_en && (>>1$rf_wr_index == $rf_rd_index1);
+$bypass_rs2 = $rf_rd_en2 && >>1$rf_wr_en && (>>1$rf_wr_index == $rf_rd_index2);
+
+$src1_value[31:0] = $bypass_rs1 ? >>1$result : $rf_rd_data1;
+$src2_value[31:0] = $bypass_rs2 ? >>1$result : $rf_rd_data2;
+```
+
+#### Waveform: register bypass
+
+![Waveform showing register bypass](images/lec30/4.png)
+
+Cycle 0 is the first cycle after reset. `@0$pc` increases by 4 every cycle. The signals below are in `@2`.
+
+| Cycle | Instruction reading in `@2` | Register file value (`$rf_rd_data1`) | Value used (`$src1_value`) | `$bypass_rs1` |
+|---|---|---|---|---|
+| 3 | `add x14, x10, x0` | `0000000a` | `00000000` | 1 |
+| 6 | `add x14, x13, x14` | `0000000d` | `00000000` | 1 |
+| 8 | `blt x13, x12, -8` | `00000000` | `00000001` | 1 |
+
+In each case the register file still gives the old value, and the bypass supplies the result of the previous instruction. No `rs2` bypass occurs in this view.
+
+**Branch squash waveform and simulation log:** Pending. This view ends before the first `blt` reaches `@3`.
+
+#### Makerchip diagram
+
+![Diagram of the pipeline with register bypass](images/lec30/5.png)
+
 ---
 
 ## Summary
