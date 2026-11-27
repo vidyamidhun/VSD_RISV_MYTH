@@ -86,7 +86,19 @@ The shown values match the hand decoding. `rs2` is not a field of this I-type in
 
 ### Comparison for `blt`
 
-**Pending:** `0xFEC6CCE3` is visible in instruction memory (`/imem[6]`), but the waveform ends before it reaches `$instr` in the CPU. Its decoded signals have not been compared yet.
+![Waveform of the blt decode](images/lec27/3.png)
+
+This waveform comes from the later CPU with branch logic ([lec29 code](../src/lec29_valid3.tlv)). It shows the `rs1` and `rs2` fields as `$rf_rd_index1` and `$rf_rd_index2`.
+
+| By hand | Waveform signal | Waveform value |
+|---|---|---|
+| B-type | `$is_b_instr` | 1 |
+| `blt` | `$is_blt` | 1 |
+| `rs1 = x13` | `$rf_rd_index1` | `0d` |
+| `rs2 = x12` | `$rf_rd_index2` | `0c` |
+| `imm = -8` | `$imm` | `fffffff8` |
+
+The shown values match the hand decoding.
 
 ---
 

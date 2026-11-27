@@ -66,7 +66,24 @@ The first six instructions are not branches, so `$is_b_instr` and `$taken_br` st
 
 `$br_tgt_pc` is calculated for every instruction, but it is only used when `$taken_br` is 1.
 
-**Taken and not-taken `blt`:** Pending.
+### Waveform: branch taken
+
+![Waveform of the taken branch](images/lec27/3.png)
+
+This run uses the [lec29 code](../src/lec29_valid3.tlv), which adds `$start` and `$valid` to the same CPU. These two signals do not control the CPU yet.
+
+| Signal at `blt` (`fec6cce3`) | First time | Second time |
+|---|---|---|
+| `$src1_value` (`x13`) | `00000001` | `00000002` |
+| `$src2_value` (`x12`) | `0000000a` | `0000000a` |
+| `$imm` | `fffffff8` (-8) | `fffffff8` (-8) |
+| `$taken_br` | 1 | 1 |
+| `$br_tgt_pc` | `00000010` | `00000010` |
+| `@0$pc` in the same cycle | `00000010` | `00000010` |
+
+The PC returns to `0x10`, so the loop repeats. On the next pass, `add x14, x13, x14` gives 1 and `addi x13, x13, 1` gives 2.
+
+**Branch not taken:** Pending.
 
 ### Makerchip diagram
 

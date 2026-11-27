@@ -21,11 +21,34 @@ Once this works, distribute fetch, decode, register read, execute and write-back
 
 ## My Lab Work and Results
 
-**To do:** Draw your stage assignment and show the valid signal waveform.
+`$start` gives the first `$valid` pulse after reset. `>>3$valid` then repeats the pulse every third cycle. `$valid` does not control the CPU yet.
 
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec29/
-     Format: ![Description](images/lec29/screenshot.png) -->
+Code: [lec29_valid3.tlv](../src/lec29_valid3.tlv)
+
+### Valid logic
+
+```tlv
+$start = >>1$reset && ! $reset;
+
+$valid = $reset ? 1'b0 :
+         $start ? 1'b1 :
+                  >>3$valid;
+```
+
+### Stage assignment
+
+| Stage | Logic in this version |
+|---|---|
+| `@0` | Reset, `$start`, `$valid`, PC and instruction memory address |
+| `@1` | Instruction read, decode, register read and write, ALU and branch logic |
+
+### Makerchip diagram
+
+![Diagram with the 3-cycle valid loop](images/lec29/1.png)
+
+### Valid waveform
+
+Pending.
 
 ---
 
