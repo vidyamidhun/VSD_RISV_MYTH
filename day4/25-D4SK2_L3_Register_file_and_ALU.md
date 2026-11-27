@@ -39,7 +39,7 @@ $result[31:0] = $is_addi ? $src1_value + $imm :
 
 ### Waveform
 
-Pending.
+![Register file and ALU waveform](images/lec25/1.png)
 
 ---
 
