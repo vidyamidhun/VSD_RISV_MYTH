@@ -20,11 +20,40 @@ Which hazards occur, and how many cycles they cost, depends on the pipeline desi
 
 ## My Lab Work and Results
 
-**To do:** Identify a dependent instruction pair in your test program.
+### Data hazards: back-to-back pairs in my test program
 
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec28/
-     Format: ![Description](images/lec28/screenshot.png) -->
+| First instruction (writes) | Next instruction (reads) | Register |
+|---|---|---|
+| `0x00` `add x10, x0, x0` | `0x04` `add x14, x10, x0` | `x10` |
+| `0x0C` `add x13, x10, x0` | `0x10` `add x14, x13, x14` | `x13` |
+| `0x14` `addi x13, x13, 1` | `0x18` `blt x13, x12, -8` | `x13` |
+
+These are read-after-write dependencies. The program also has dependencies between instructions that are farther apart.
+
+### Control hazard
+
+`0x18` `blt x13, x12, -8` decides whether the next instruction is at `0x10` (taken) or `0x1C` (not taken). The CPU does not know this when it would normally fetch the next instruction.
+
+### Structural hazard
+
+I did not identify one in this design. Instructions come from a separate instruction memory, and the register file has two read ports and one write port.
+
+### Evidence from the 3-cycle CPU
+
+The hazard messages from [lec30](30-D5SK1_L3_Hazard_solutions.md) report the same three data dependencies (PC `0x04`, `0x10` and `0x18`) and the taken branch at `0x18`.
+
+![Hazard messages from the 3-cycle CPU](images/lec30/1.png)
+
+In the 3-cycle CPU these cause no wrong result, because the next valid instruction starts three cycles later. The simulation passes.
+
+### What changes with one instruction every cycle
+
+This is the expected behaviour if registers are read in `@2` and written in `@3`, and branches redirect the PC from `@3`. I have not simulated this pipeline on this page.
+
+| Hazard | Effect without handling | Handling |
+|---|---|---|
+| Data: the three pairs above | The second instruction reads the old register value | Register bypass |
+| Control: taken `blt` | The next two fetched instructions (`0x1C` and `0x20`) are on the wrong path | Mark them invalid |
 
 ---
 
