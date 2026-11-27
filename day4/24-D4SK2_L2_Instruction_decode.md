@@ -27,11 +27,66 @@ Fields that a format does not have must not be used.
 
 ## My Lab Work and Results
 
-**To do:** Decode two instructions from your test program by hand and compare with your waveform.
+### TL-Verilog Code
 
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec24/
-     Format: ![Description](images/lec24/screenshot.png) -->
+[View the decode code](../src/lec24_decode_short.tlv)
+
+This short version decodes selected fields of I-type immediate arithmetic and B-type instructions only. It uses when conditions, such as `?$is_b_instr`, for fields that are not always valid.
+
+### Hand Decoding 1: `0x00A50613` (I-type)
+
+```text
+imm[11:0]     rs1    funct3  rd     opcode
+000000001010  01010  000     01100  0010011
+```
+
+`rs1 = x10`, `rd = x12`, `imm = 10` and `funct3 = 000`.
+
+**Instruction:** `addi x12, x10, 10`
+
+### Hand Decoding 2: `0xFEC6CCE3` (B-type)
+
+```text
+imm[12] imm[10:5] rs2    rs1    funct3  imm[4:1] imm[11] opcode
+1       111111    01100  01101  100     1100     1       1100011
+```
+
+The immediate is rebuilt as `imm[12]`, `imm[11]`, `imm[10:5]`, `imm[4:1]` and a final 0:
+
+```text
+1 1 111111 1100 0 = 1111111111000 = -8
+```
+
+`rs1 = x13`, `rs2 = x12`, `imm = -8` and `funct3 = 100`.
+
+**Instruction:** `blt x13, x12, -8`
+
+`funct3` was decoded by hand. The short code does not output it.
+
+### Makerchip Diagram
+
+![Makerchip diagram of the instruction decode](images/lec24/2.png)
+
+### Waveform
+
+![Waveform of the instruction decode from reset](images/lec24/1.png)
+
+### Comparison for `addi`
+
+| Signal | By hand | Waveform |
+|---|---|---|
+| `$instr` | `00a50613` | `00a50613` |
+| `$is_i_instr` | 1 | 1 |
+| `$is_b_instr` | 0 | 0 |
+| `$rs1` | `0a` | `0a` |
+| `$rd` | `0c` | `0c` |
+| `$imm` | `0000000a` | `0000000a` |
+
+The shown values match the hand decoding. `rs2` is not a field of this I-type instruction, so its value is ignored.
+
+### Comparison for `blt`
+
+**Pending:** `0xFEC6CCE3` is visible in instruction memory (`/imem[6]`), but the waveform ends before it reaches `$instr` in the CPU. Its decoded signals have not been compared yet.
 
 ---
 
