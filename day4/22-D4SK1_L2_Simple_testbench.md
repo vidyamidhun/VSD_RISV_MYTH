@@ -20,11 +20,28 @@ A cycle limit stops a faulty design from appearing to run for ever. Passing one 
 
 ## My Lab Work and Results
 
-**To do:** Record your pass condition and the simulation log.
+### Pass Condition
 
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec22/
-     Format: ![Description](images/lec22/screenshot.png) -->
+From the [CPU code](../src/basic_riscv_cpu.tlv):
+
+```tlv
+// Pass when x15 holds 1+2+...+9 = 45
+*passed = |cpu/xreg[15]>>1$value == 32'd45;
+*failed = *cyc_cnt > 60;
+```
+
+| Part | Meaning |
+|---|---|
+| `\|cpu/xreg[15]` | Register `x15` in the CPU register file |
+| `>>1$value` | Its value one cycle earlier |
+| `== 32'd45` | Passes when that value is 45 |
+| `*cyc_cnt > 60` | Triggers failure once the cycle count is above 60 |
+
+The test program is designed to add the numbers from 1 to 9, store the sum with `sw` and load it into `x15` with `lw`. This test does not check every supported instruction.
+
+### Simulation Log
+
+**Pending:** the Makerchip simulation log has not been added yet.
 
 ---
 
