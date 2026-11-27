@@ -21,11 +21,25 @@ Reading is enabled only when the instruction uses that source. The ALU selects a
 
 ## My Lab Work and Results
 
-**To do:** Show register reads and the ALU result for one `add` and one `addi`.
+The ALU gives `$result` for `add` and `addi`, using operands read from the register file. Register writes are off in this lab.
 
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec25/
-     Format: ![Description](images/lec25/screenshot.png) -->
+Code: [lec25_alu.tlv](../src/lec25_alu.tlv)
+
+### ALU logic
+
+```tlv
+$result[31:0] = $is_addi ? $src1_value + $imm :
+                $is_add  ? $src1_value + $src2_value :
+                           32'bx;
+```
+
+### Makerchip diagram
+
+![Register file and ALU diagram](images/lec25/2.png)
+
+### Waveform
+
+Pending.
 
 ---
 
