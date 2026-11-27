@@ -1,0 +1,16 @@
+instructions    998
+branches        225
+taken branches  87
+loads           63
+stores          36
+jumps           141
+C = [30, 24, 18, 84, 69, 54, 138, 114, 90]
+branch PC: executed / taken (miss)
+  0x014:  27 /   0
+  0x028:  75 /  27
+  0x030:  75 /  30
+  0x094:   9 /   8
+  0x0b8:   9 /   3
+  0x0e0:  27 /  18
+  0x0ec:   3 /   1
+expected cycles: pipelined 1580, non-pipelined 2994

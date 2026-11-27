@@ -1,0 +1,23 @@
+Result C (pipelined CPU):
+     30   24   18
+     84   69   54
+    138  114   90
+---------- NON-PIPELINED ----------
+Latency (clock cycles) : 2994
+Instructions executed  : 998
+CPI                    : 3.000
+Conditional branches   : 225   taken: 87
+Loads: 63   Jumps: 141
+---------- PIPELINED ----------
+Latency (clock cycles) : 1580
+Instructions executed  : 998
+CPI                    : 1.583
+Conditional branches   : 225   taken: 87
+Loads: 63   Jumps: 141
+Branch misses          : 87
+Branch penalty cycles  : 174 (2 per miss)
+Load penalty cycles    : 126
+Jump penalty cycles    : 282
+Speed-up in cycles     : 1.895
+RESULT: PASSED (both CPUs computed the correct C)
+sim/tb.v:58: $finish called at 30065000 (1ps)
