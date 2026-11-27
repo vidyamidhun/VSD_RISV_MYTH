@@ -17,17 +17,25 @@ program = '\n'.join("      assign instrs[%d] = 32'h%s;   // %03x: %s" % (i, w, 4
 program += ''.join("\n      assign instrs[%d] = 32'h00000013;   // nop (padding)" % (len(code) + i)
                    for i in range(PAD))
 
-C = [30, 24, 18, 84, 69, 54, 138, 114, 90]
-cell = lambda i: '|cpu/dmem[%d]' % (18 + i)
-print_c = '\n'.join(
-    '                  \\$display("   %%4d %%4d %%4d", %s);' %
-    ', '.join('/dmem[%d]>>1$value' % (18 + r * 3 + c) for c in range(3)) for r in range(3))
+C = [4, 5, 10, 11]
+cell = lambda i: '|cpu/dmem[%d]' % (24 + i)
+def matrix(title, base):
+    lines = ['                  \\$display("%s");' % title]
+    for r in range(2):
+        cells = ', '.join('/dmem[%d]>>1$value' % (base + r * 2 + c) for c in range(2))
+        lines.append('                  \\$display("   %%4d %%4d", %s);' % cells)
+    return lines
+
+# A, B and C are read from data memory: words 16, 20 and 24
+print_matrices = '\n'.join(matrix('Input matrix A (2x2)', 16) +
+                           matrix('Input matrix B (2x2)', 20) +
+                           matrix('Output matrix C = A x B', 24))
 passed = ' &&\n'.join("             %s>>5$value == 32'd%d" % (cell(i), v) for i, v in enumerate(C)) + ';'
 
 D = '                  \\$display('
 versions = {
  'rvmyth_pipelined.tlv': dict(
-  TITLE='PIPELINED', FAILCYC='2500',
+  TITLE='PIPELINED', FAILCYC='450',
   PC="""         // Fetch every cycle. A redirect comes from the instruction 3 cycles ahead
          $pc[31:0] = >>1$reset          ? 32'd0 :
                      >>3$valid_taken_br ? >>3$br_tgt_pc :
@@ -50,7 +58,7 @@ versions = {
    D + '"Check: instructions + all penalties = %0d",',
    '                            $cnt_instr + 2 * ($cnt_taken + $cnt_load + $cnt_jump));'])),
  'rvmyth_nonpipelined.tlv': dict(
-  TITLE='NON-PIPELINED', FAILCYC='4000',
+  TITLE='NON-PIPELINED', FAILCYC='560',
   PC="""         // One instruction at a time: a new one starts every 3rd cycle
          $start = >>1$reset && ! $reset;
          $slot  = $reset ? 1'b0 :
@@ -75,7 +83,7 @@ versions = {
 }
 for name, v in versions.items():
     text = template
-    v.update(PROGRAM=program, LAST=str(len(code) + PAD - 1), PRINT_C=print_c, PASS=passed)
+    v.update(PROGRAM=program, LAST=str(len(code) + PAD - 1), PRINT_MATRICES=print_matrices, PASS=passed)
     for key, value in v.items():
         text = text.replace('@%s@' % key, value.rstrip('\n'))
     assert not re.search(r'@[A-Z_]{2,}@', text)

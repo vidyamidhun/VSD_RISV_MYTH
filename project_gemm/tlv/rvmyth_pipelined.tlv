@@ -1,93 +1,70 @@
 \m4_TLV_version 1d: tl-x.org
 \SV
-   // RVMYTH running a 3x3 GEMM program: PIPELINED
+   // RVMYTH running a 2x2 GEMM program: PIPELINED
    // GENERATED FILE: edit scripts/rvmyth_template.tlv, then run scripts/make_tlv.py
    m4_makerchip_module   // (Expanded in Nav-TLV pane.)
 
 \TLV
    // Program: machine code of c/gemm.c and c/start.s (see asm/gemm.objdump.txt)
    \SV_plus
-      logic [31:0] instrs [0:79];
+      logic [31:0] instrs [0:56];
       assign instrs[0] = 32'h10000113;   // 000: li x2,256
-      assign instrs[1] = 32'h044000ef;   // 004: jal 48 <main>
+      assign instrs[1] = 32'h008000ef;   // 004: jal c <main>
       assign instrs[2] = 32'h0000006f;   // 008: j 8 <halt>
-      assign instrs[3] = 32'h00050713;   // 00c: mv x14,x10
-      assign instrs[4] = 32'h00058793;   // 010: mv x15,x11
-      assign instrs[5] = 32'h02058663;   // 014: beqz x11,40 <soft_mul+0x34>
-      assign instrs[6] = 32'h00000513;   // 018: li x10,0
-      assign instrs[7] = 32'h0100006f;   // 01c: j 2c <soft_mul+0x20>
-      assign instrs[8] = 32'h00171713;   // 020: slli x14,x14,0x1
-      assign instrs[9] = 32'h0017d793;   // 024: srli x15,x15,0x1
-      assign instrs[10] = 32'h00078a63;   // 028: beqz x15,3c <soft_mul+0x30>
-      assign instrs[11] = 32'h0017f693;   // 02c: andi x13,x15,1
-      assign instrs[12] = 32'hfe0688e3;   // 030: beqz x13,20 <soft_mul+0x14>
-      assign instrs[13] = 32'h00e50533;   // 034: add x10,x10,x14
-      assign instrs[14] = 32'hfe9ff06f;   // 038: j 20 <soft_mul+0x14>
-      assign instrs[15] = 32'h00008067;   // 03c: ret
-      assign instrs[16] = 32'h00058513;   // 040: mv x10,x11
-      assign instrs[17] = 32'h00008067;   // 044: ret
-      assign instrs[18] = 32'hfd010113;   // 048: addi x2,x2,-48
-      assign instrs[19] = 32'h02112623;   // 04c: sw x1,44(x2)
-      assign instrs[20] = 32'h02812423;   // 050: sw x8,40(x2)
-      assign instrs[21] = 32'h02912223;   // 054: sw x9,36(x2)
-      assign instrs[22] = 32'h03212023;   // 058: sw x18,32(x2)
-      assign instrs[23] = 32'h01312e23;   // 05c: sw x19,28(x2)
-      assign instrs[24] = 32'h01412c23;   // 060: sw x20,24(x2)
-      assign instrs[25] = 32'h01512a23;   // 064: sw x21,20(x2)
-      assign instrs[26] = 32'h01612823;   // 068: sw x22,16(x2)
-      assign instrs[27] = 32'h01712623;   // 06c: sw x23,12(x2)
-      assign instrs[28] = 32'h00000713;   // 070: li x14,0
-      assign instrs[29] = 32'h00000793;   // 074: li x15,0
-      assign instrs[30] = 32'h00a00593;   // 078: li x11,10
-      assign instrs[31] = 32'h00900613;   // 07c: li x12,9
-      assign instrs[32] = 32'h00178793;   // 080: addi x15,x15,1
-      assign instrs[33] = 32'h00f72023;   // 084: sw x15,0(x14)
-      assign instrs[34] = 32'h40f586b3;   // 088: sub x13,x11,x15
-      assign instrs[35] = 32'h02d72223;   // 08c: sw x13,36(x14)
-      assign instrs[36] = 32'h00470713;   // 090: addi x14,x14,4
-      assign instrs[37] = 32'hfec796e3;   // 094: bne x15,x12,80 <main+0x38>
-      assign instrs[38] = 32'h00000a93;   // 098: li x21,0
-      assign instrs[39] = 32'h00300b13;   // 09c: li x22,3
-      assign instrs[40] = 32'h02400b93;   // 0a0: li x23,36
-      assign instrs[41] = 32'h04c0006f;   // 0a4: j f0 <main+0xa8>
-      assign instrs[42] = 32'h015987b3;   // 0a8: add x15,x19,x21
-      assign instrs[43] = 32'h0127a023;   // 0ac: sw x18,0(x15)
-      assign instrs[44] = 32'h001a0a13;   // 0b0: addi x20,x20,1
-      assign instrs[45] = 32'h00498993;   // 0b4: addi x19,x19,4
-      assign instrs[46] = 32'h036a0863;   // 0b8: beq x20,x22,e8 <main+0xa0>
-      assign instrs[47] = 32'hfdc98413;   // 0bc: addi x8,x19,-36
-      assign instrs[48] = 32'h000a8493;   // 0c0: mv x9,x21
-      assign instrs[49] = 32'h00000913;   // 0c4: li x18,0
-      assign instrs[50] = 32'h0004a503;   // 0c8: lw x10,0(x9)
-      assign instrs[51] = 32'h00042583;   // 0cc: lw x11,0(x8)
-      assign instrs[52] = 32'hf3dff0ef;   // 0d0: jal c <soft_mul>
-      assign instrs[53] = 32'h00a90933;   // 0d4: add x18,x18,x10
-      assign instrs[54] = 32'h00448493;   // 0d8: addi x9,x9,4
-      assign instrs[55] = 32'h00c40413;   // 0dc: addi x8,x8,12
-      assign instrs[56] = 32'hff3414e3;   // 0e0: bne x8,x19,c8 <main+0x80>
-      assign instrs[57] = 32'hfc5ff06f;   // 0e4: j a8 <main+0x60>
-      assign instrs[58] = 32'h00ca8a93;   // 0e8: addi x21,x21,12
-      assign instrs[59] = 32'h017a8863;   // 0ec: beq x21,x23,fc <main+0xb4>
-      assign instrs[60] = 32'h04800993;   // 0f0: li x19,72
-      assign instrs[61] = 32'h00000a13;   // 0f4: li x20,0
-      assign instrs[62] = 32'hfc5ff06f;   // 0f8: j bc <main+0x74>
-      assign instrs[63] = 32'h00000513;   // 0fc: li x10,0
-      assign instrs[64] = 32'h02c12083;   // 100: lw x1,44(x2)
-      assign instrs[65] = 32'h02812403;   // 104: lw x8,40(x2)
-      assign instrs[66] = 32'h02412483;   // 108: lw x9,36(x2)
-      assign instrs[67] = 32'h02012903;   // 10c: lw x18,32(x2)
-      assign instrs[68] = 32'h01c12983;   // 110: lw x19,28(x2)
-      assign instrs[69] = 32'h01812a03;   // 114: lw x20,24(x2)
-      assign instrs[70] = 32'h01412a83;   // 118: lw x21,20(x2)
-      assign instrs[71] = 32'h01012b03;   // 11c: lw x22,16(x2)
-      assign instrs[72] = 32'h00c12b83;   // 120: lw x23,12(x2)
-      assign instrs[73] = 32'h03010113;   // 124: addi x2,x2,48
-      assign instrs[74] = 32'h00008067;   // 128: ret
-      assign instrs[75] = 32'h00000013;   // nop (padding)
-      assign instrs[76] = 32'h00000013;   // nop (padding)
-      assign instrs[77] = 32'h00000013;   // nop (padding)
-      assign instrs[78] = 32'h00000013;   // nop (padding)
-      assign instrs[79] = 32'h00000013;   // nop (padding)
+      assign instrs[3] = 32'h00100713;   // 00c: li x14,1
+      assign instrs[4] = 32'h04e02023;   // 010: sw x14,64(x0) # 40 <main+0x34>
+      assign instrs[5] = 32'h00200793;   // 014: li x15,2
+      assign instrs[6] = 32'h04f02223;   // 018: sw x15,68(x0) # 44 <main+0x38>
+      assign instrs[7] = 32'h00300693;   // 01c: li x13,3
+      assign instrs[8] = 32'h04d02423;   // 020: sw x13,72(x0) # 48 <main+0x3c>
+      assign instrs[9] = 32'h00400693;   // 024: li x13,4
+      assign instrs[10] = 32'h04d02623;   // 028: sw x13,76(x0) # 4c <main+0x40>
+      assign instrs[11] = 32'h04f02823;   // 02c: sw x15,80(x0) # 50 <main+0x44>
+      assign instrs[12] = 32'h04e02a23;   // 030: sw x14,84(x0) # 54 <main+0x48>
+      assign instrs[13] = 32'h04e02c23;   // 034: sw x14,88(x0) # 58 <main+0x4c>
+      assign instrs[14] = 32'h04f02e23;   // 038: sw x15,92(x0) # 5c <main+0x50>
+      assign instrs[15] = 32'h00000613;   // 03c: li x12,0
+      assign instrs[16] = 32'h00000513;   // 040: li x10,0
+      assign instrs[17] = 32'h05800313;   // 044: li x6,88
+      assign instrs[18] = 32'h00400e13;   // 048: li x28,4
+      assign instrs[19] = 32'h05000713;   // 04c: li x14,80
+      assign instrs[20] = 32'h01060893;   // 050: addi x17,x12,16
+      assign instrs[21] = 32'h0300006f;   // 054: j 84 <main+0x78>
+      assign instrs[22] = 32'h0016fe93;   // 058: andi x29,x13,1
+      assign instrs[23] = 32'h000e8463;   // 05c: beqz x29,64 <main+0x58>
+      assign instrs[24] = 32'h00b787b3;   // 060: add x15,x15,x11
+      assign instrs[25] = 32'h00159593;   // 064: slli x11,x11,0x1
+      assign instrs[26] = 32'h0016d693;   // 068: srli x13,x13,0x1
+      assign instrs[27] = 32'hfe0696e3;   // 06c: bnez x13,58 <main+0x4c>
+      assign instrs[28] = 32'h00e886b3;   // 070: add x13,x17,x14
+      assign instrs[29] = 32'h010787b3;   // 074: add x15,x15,x16
+      assign instrs[30] = 32'h00f6a023;   // 078: sw x15,0(x13)
+      assign instrs[31] = 32'h00470713;   // 07c: addi x14,x14,4
+      assign instrs[32] = 32'h02670e63;   // 080: beq x14,x6,bc <main+0xb0>
+      assign instrs[33] = 32'h04062683;   // 084: lw x13,64(x12)
+      assign instrs[34] = 32'h00072783;   // 088: lw x15,0(x14)
+      assign instrs[35] = 32'h00000813;   // 08c: li x16,0
+      assign instrs[36] = 32'h02078063;   // 090: beqz x15,b0 <main+0xa4>
+      assign instrs[37] = 32'h0017f593;   // 094: andi x11,x15,1
+      assign instrs[38] = 32'h00059863;   // 098: bnez x11,a8 <main+0x9c>
+      assign instrs[39] = 32'h00169693;   // 09c: slli x13,x13,0x1
+      assign instrs[40] = 32'h0017d793;   // 0a0: srli x15,x15,0x1
+      assign instrs[41] = 32'hfedff06f;   // 0a4: j 90 <main+0x84>
+      assign instrs[42] = 32'h00d80833;   // 0a8: add x16,x16,x13
+      assign instrs[43] = 32'hff1ff06f;   // 0ac: j 9c <main+0x90>
+      assign instrs[44] = 32'h04462583;   // 0b0: lw x11,68(x12)
+      assign instrs[45] = 32'h00872683;   // 0b4: lw x13,8(x14)
+      assign instrs[46] = 32'hfb5ff06f;   // 0b8: j 6c <main+0x60>
+      assign instrs[47] = 32'h00250513;   // 0bc: addi x10,x10,2
+      assign instrs[48] = 32'h00860613;   // 0c0: addi x12,x12,8
+      assign instrs[49] = 32'hf9c514e3;   // 0c4: bne x10,x28,4c <main+0x40>
+      assign instrs[50] = 32'h00000513;   // 0c8: li x10,0
+      assign instrs[51] = 32'h00008067;   // 0cc: ret
+      assign instrs[52] = 32'h00000013;   // nop (padding)
+      assign instrs[53] = 32'h00000013;   // nop (padding)
+      assign instrs[54] = 32'h00000013;   // nop (padding)
+      assign instrs[55] = 32'h00000013;   // nop (padding)
+      assign instrs[56] = 32'h00000013;   // nop (padding)
 
    |cpu
       @0
@@ -104,7 +81,7 @@
 
       @1
          // Instruction memory
-         /imem[79:0]
+         /imem[56:0]
             $word[31:0] = *instrs\[#imem\];
          $instr[31:0] = /imem[$imem_rd_addr]$word;
 
@@ -278,10 +255,16 @@
             always_ff @(posedge *clk) begin
                if ($report) begin
                   \$display("================ GEMM REPORT: PIPELINED ================");
-                  \$display("Result C = A x B");
-                  \$display("   %4d %4d %4d", /dmem[18]>>1$value, /dmem[19]>>1$value, /dmem[20]>>1$value);
-                  \$display("   %4d %4d %4d", /dmem[21]>>1$value, /dmem[22]>>1$value, /dmem[23]>>1$value);
-                  \$display("   %4d %4d %4d", /dmem[24]>>1$value, /dmem[25]>>1$value, /dmem[26]>>1$value);
+                  \$display("Input matrix A (2x2)");
+                  \$display("   %4d %4d", /dmem[16]>>1$value, /dmem[17]>>1$value);
+                  \$display("   %4d %4d", /dmem[18]>>1$value, /dmem[19]>>1$value);
+                  \$display("Input matrix B (2x2)");
+                  \$display("   %4d %4d", /dmem[20]>>1$value, /dmem[21]>>1$value);
+                  \$display("   %4d %4d", /dmem[22]>>1$value, /dmem[23]>>1$value);
+                  \$display("Output matrix C = A x B");
+                  \$display("   %4d %4d", /dmem[24]>>1$value, /dmem[25]>>1$value);
+                  \$display("   %4d %4d", /dmem[26]>>1$value, /dmem[27]>>1$value);
+                  \$display("-----------------------------------------------------");
                   \$display("Latency (clock cycles)     : %0d", $cnt_cycles);
                   \$display("Instructions executed      : %0d", $cnt_instr);
                   \$display("CPI                        : %0d.%03d", $cnt_cycles / $cnt_instr,
@@ -300,17 +283,13 @@
                end
             end
 
-   // Pass when the program has ended and every element of C is correct
-   *passed = |cpu>>5$done &&
-             |cpu/dmem[18]>>5$value == 32'd30 &&
-             |cpu/dmem[19]>>5$value == 32'd24 &&
-             |cpu/dmem[20]>>5$value == 32'd18 &&
-             |cpu/dmem[21]>>5$value == 32'd84 &&
-             |cpu/dmem[22]>>5$value == 32'd69 &&
-             |cpu/dmem[23]>>5$value == 32'd54 &&
-             |cpu/dmem[24]>>5$value == 32'd138 &&
-             |cpu/dmem[25]>>5$value == 32'd114 &&
-             |cpu/dmem[26]>>5$value == 32'd90;
-   *failed = *cyc_cnt > 2500;
+   // Pass when the program has ended and every element of C is correct.
+   // >>9 raises "passed" 4 cycles after the report prints, so the log is not cut off
+   *passed = |cpu>>9$done &&
+             |cpu/dmem[24]>>5$value == 32'd4 &&
+             |cpu/dmem[25]>>5$value == 32'd5 &&
+             |cpu/dmem[26]>>5$value == 32'd10 &&
+             |cpu/dmem[27]>>5$value == 32'd11;
+   *failed = *cyc_cnt > 450;
 \SV
    endmodule

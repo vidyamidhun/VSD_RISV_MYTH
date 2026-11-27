@@ -4,96 +4,69 @@
 	.attribute unaligned_access, 0
 	.attribute stack_align, 16
 	.text
-	.align	2
-	.type	soft_mul, @function
-soft_mul:
-	mv	a4,a0
-	mv	a5,a1
-	beq	a1,zero,.L5
-	li	a0,0
-	j	.L4
-.L3:
-	slli	a4,a4,1
-	srli	a5,a5,1
-	beq	a5,zero,.L7
-.L4:
-	andi	a3,a5,1
-	beq	a3,zero,.L3
-	add	a0,a0,a4
-	j	.L3
-.L7:
-	ret
-.L5:
-	mv	a0,a1
-	ret
-	.size	soft_mul, .-soft_mul
+	.section	.text.startup,"ax",@progbits
 	.align	2
 	.globl	main
 	.type	main, @function
 main:
-	addi	sp,sp,-48
-	sw	ra,44(sp)
-	sw	s0,40(sp)
-	sw	s1,36(sp)
-	sw	s2,32(sp)
-	sw	s3,28(sp)
-	sw	s4,24(sp)
-	sw	s5,20(sp)
-	sw	s6,16(sp)
-	sw	s7,12(sp)
-	li	a4,0
-	li	a5,0
-	li	a1,10
-	li	a2,9
-.L9:
-	addi	a5,a5,1
-	sw	a5,0(a4)
-	sub	a3,a1,a5
-	sw	a3,36(a4)
-	addi	a4,a4,4
-	bne	a5,a2,.L9
-	li	s5,0
-	li	s6,3
-	li	s7,36
-	j	.L10
-.L18:
-	add	a5,s3,s5
-	sw	s2,0(a5)
-	addi	s4,s4,1
-	addi	s3,s3,4
-	beq	s4,s6,.L12
-.L14:
-	addi	s0,s3,-36
-	mv	s1,s5
-	li	s2,0
-.L11:
-	lw	a0,0(s1)
-	lw	a1,0(s0)
-	call	soft_mul
-	add	s2,s2,a0
-	addi	s1,s1,4
-	addi	s0,s0,12
-	bne	s0,s3,.L11
-	j	.L18
-.L12:
-	addi	s5,s5,12
-	beq	s5,s7,.L13
-.L10:
-	li	s3,72
-	li	s4,0
-	j	.L14
-.L13:
+	li	a4,1
+	sw	a4,64(zero)
+	li	a5,2
+	sw	a5,68(zero)
+	li	a3,3
+	sw	a3,72(zero)
+	li	a3,4
+	sw	a3,76(zero)
+	sw	a5,80(zero)
+	sw	a4,84(zero)
+	sw	a4,88(zero)
+	sw	a5,92(zero)
+	li	a2,0
 	li	a0,0
-	lw	ra,44(sp)
-	lw	s0,40(sp)
-	lw	s1,36(sp)
-	lw	s2,32(sp)
-	lw	s3,28(sp)
-	lw	s4,24(sp)
-	lw	s5,20(sp)
-	lw	s6,16(sp)
-	lw	s7,12(sp)
-	addi	sp,sp,48
-	jr	ra
+	li	t1,88
+	li	t3,4
+.L2:
+	li	a4,80
+	addi	a7,a2,16
+	j	.L12
+.L4:
+	andi	t4,a3,1
+	beq	t4,zero,.L3
+	add	a5,a5,a1
+.L3:
+	slli	a1,a1,1
+	srli	a3,a3,1
+.L10:
+	bne	a3,zero,.L4
+	add	a3,a7,a4
+	add	a5,a5,a6
+	sw	a5,0(a3)
+	addi	a4,a4,4
+	beq	a4,t1,.L5
+.L12:
+	lw	a3,64(a2)
+	lw	a5,0(a4)
+	li	a6,0
+.L8:
+	beq	a5,zero,.L6
+	andi	a1,a5,1
+	bne	a1,zero,.L7
+.L9:
+	slli	a3,a3,1
+	srli	a5,a5,1
+	j	.L8
+.L7:
+	add	a6,a6,a3
+	j	.L9
+.L6:
+	lw	a1,68(a2)
+	lw	a3,8(a4)
+	j	.L10
+.L5:
+	addi	a0,a0,2
+	addi	a2,a2,8
+	bne	a0,t3,.L2
+	li	a0,0
+	ret
 	.size	main, .-main
 	.ident	"GCC: (13.2.0-11ubuntu1+12) 13.2.0"

@@ -8,7 +8,7 @@ Use PNG format (names ending in `.png`, lowercase).
 Option A, Compiler Explorer (https://godbolt.org):
 1. Language: **C**.
 2. Compiler: **RISC-V (32-bits) gcc 13.2.0**.
-3. Compiler options: `-march=rv32i -mabi=ilp32 -O1 -ffreestanding`
+3. Compiler options: `-march=rv32i -mabi=ilp32 -Os -ffreestanding`
 4. Paste `c/gemm.c`.
 5. Screenshot showing the C code and the assembly.
 
@@ -47,14 +47,14 @@ Show that `$valid` is high **once every 3 cycles** and `$pc` stays the same in b
 
 ## Step 4: Compare
 
-Expected values:
+The log also shows inputs A and B and output C. Expected values:
 
 | | Non-pipelined | Pipelined |
 |---|---:|---:|
-| Latency (cycles) | 2994 | 1580 |
-| Instructions | 998 | 998 |
-| Branch misses | 0 | 87 |
-| Branch penalty cycles | 0 | 174 |
+| Latency (cycles) | 486 | 268 |
+| Instructions | 162 | 162 |
+| Branch misses | 0 | 19 |
+| Branch penalty cycles | 0 | 38 |
 
 If your log shows different values, or there is an error, or the run stops before the report
 appears, keep the log and fix the problem before submitting. Do not edit the numbers by hand.

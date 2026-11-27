@@ -1,23 +1,28 @@
-Result C (pipelined CPU):
-     30   24   18
-     84   69   54
-    138  114   90
+Input matrix A (2x2)
+      1    2
+      3    4
+Input matrix B (2x2)
+      2    1
+      1    2
+Output matrix C = A x B
+      4    5
+     10   11
 ---------- NON-PIPELINED ----------
-Latency (clock cycles) : 2994
-Instructions executed  : 998
+Latency (clock cycles) : 486
+Instructions executed  : 162
 CPI                    : 3.000
-Conditional branches   : 225   taken: 87
-Loads: 63   Jumps: 141
+Conditional branches   : 38   taken: 19
+Loads: 16   Jumps: 18
 ---------- PIPELINED ----------
-Latency (clock cycles) : 1580
-Instructions executed  : 998
-CPI                    : 1.583
-Conditional branches   : 225   taken: 87
-Loads: 63   Jumps: 141
-Branch misses          : 87
-Branch penalty cycles  : 174 (2 per miss)
-Load penalty cycles    : 126
-Jump penalty cycles    : 282
-Speed-up in cycles     : 1.895
+Latency (clock cycles) : 268
+Instructions executed  : 162
+CPI                    : 1.654
+Conditional branches   : 38   taken: 19
+Loads: 16   Jumps: 18
+Branch misses          : 19
+Branch penalty cycles  : 38 (2 per miss)
+Load penalty cycles    : 32
+Jump penalty cycles    : 36
+Speed-up in cycles     : 1.813
 RESULT: PASSED (both CPUs computed the correct C)
-sim/tb.v:58: $finish called at 30065000 (1ps)
+sim/tb.v:59: $finish called at 4985000 (1ps)

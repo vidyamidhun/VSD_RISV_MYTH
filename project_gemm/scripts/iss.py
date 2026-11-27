@@ -61,7 +61,7 @@ while True:
     pc = nxt
 for k in ['instructions', 'branches', 'taken branches', 'loads', 'stores', 'jumps']:
     print('%-15s %d' % (k, count[k]))
-print('C =', mem[18:27])
+print('C =', mem[24:28])
 print('branch PC: executed / taken (miss)')
 for a, (e, t) in sorted(per_branch.items()):
     print('  0x%03x: %3d / %3d' % (a, e, t))

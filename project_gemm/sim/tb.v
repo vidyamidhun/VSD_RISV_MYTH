@@ -8,7 +8,7 @@ module tb;
    rvmyth_core #(.PIPELINED(0)) nonp (.clk(clk), .reset(reset));
 
    integer i, errors, cycle;
-   reg [31:0] expect_c [0:8];
+   reg [31:0] expect_c [0:3];
 
    task check_and_report(input [8*14:1] name, input integer cycles, input integer instr,
                          input integer branches, input integer taken,
@@ -25,11 +25,9 @@ module tb;
 
    initial begin
       for (i = 0; i < 128; i = i + 1) begin pipe.imem[i] = 32'h13; nonp.imem[i] = 32'h13; end
-      $readmemh("asm/gemm.hex", pipe.imem, 0, 74);
-      $readmemh("asm/gemm.hex", nonp.imem, 0, 74);
-      expect_c[0]=30;  expect_c[1]=24;  expect_c[2]=18;
-      expect_c[3]=84;  expect_c[4]=69;  expect_c[5]=54;
-      expect_c[6]=138; expect_c[7]=114; expect_c[8]=90;
+      $readmemh("asm/gemm.hex", pipe.imem, 0, 51);
+      $readmemh("asm/gemm.hex", nonp.imem, 0, 51);
+      expect_c[0]=4;  expect_c[1]=5;  expect_c[2]=10;  expect_c[3]=11;
       if ($test$plusargs("vcd")) begin $dumpfile("sim/gemm.vcd"); $dumpvars(0, tb); end
       repeat (5) @(posedge clk);
       #1 reset = 0;
@@ -37,13 +35,16 @@ module tb;
       while (!(pipe.done && nonp.done) && cycle < 10000) begin @(posedge clk); cycle = cycle + 1; end
       repeat (3) @(posedge clk);
       errors = (pipe.done && nonp.done) ? 0 : 1;
-      for (i = 0; i < 9; i = i + 1) begin
-         if (pipe.dmem[18+i] !== expect_c[i]) errors = errors + 1;
-         if (nonp.dmem[18+i] !== expect_c[i]) errors = errors + 1;
+      for (i = 0; i < 4; i = i + 1) begin
+         if (pipe.dmem[24+i] !== expect_c[i]) errors = errors + 1;
+         if (nonp.dmem[24+i] !== expect_c[i]) errors = errors + 1;
       end
-      $display("Result C (pipelined CPU):");
-      for (i = 0; i < 3; i = i + 1)
-         $display("   %4d %4d %4d", pipe.dmem[18+3*i], pipe.dmem[19+3*i], pipe.dmem[20+3*i]);
+      $display("Input matrix A (2x2)");
+      for (i = 16; i < 20; i = i + 2) $display("   %4d %4d", pipe.dmem[i], pipe.dmem[i+1]);
+      $display("Input matrix B (2x2)");
+      for (i = 20; i < 24; i = i + 2) $display("   %4d %4d", pipe.dmem[i], pipe.dmem[i+1]);
+      $display("Output matrix C = A x B");
+      for (i = 24; i < 28; i = i + 2) $display("   %4d %4d", pipe.dmem[i], pipe.dmem[i+1]);
       check_and_report("NON-PIPELINED", nonp.cnt_cycles, nonp.cnt_instr, nonp.cnt_branch,
                        nonp.cnt_taken, nonp.cnt_load, nonp.cnt_jump);
       check_and_report("PIPELINED", pipe.cnt_cycles, pipe.cnt_instr, pipe.cnt_branch,

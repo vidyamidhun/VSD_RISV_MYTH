@@ -1,0 +1,8 @@
+Excerpt from the Makerchip log of the 2x2 non-pipelined run (2026-11-27).
+Build lines are left out. No GEMM report was printed in this run.
+
+SandPiper generated 62% of your HDL code.
+This includes: 214 signal declarations, 121 flops/latches, and 0 conditional clock signals.
+
+Simulating and tracing...
+Simulation PASSED!!!

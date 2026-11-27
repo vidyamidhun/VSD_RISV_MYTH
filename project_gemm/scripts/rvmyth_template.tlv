@@ -1,6 +1,6 @@
 \m4_TLV_version 1d: tl-x.org
 \SV
-   // RVMYTH running a 3x3 GEMM program: @TITLE@
+   // RVMYTH running a 2x2 GEMM program: @TITLE@
    // GENERATED FILE: edit scripts/rvmyth_template.tlv, then run scripts/make_tlv.py
    m4_makerchip_module   // (Expanded in Nav-TLV pane.)
 
@@ -189,8 +189,8 @@
             always_ff @(posedge *clk) begin
                if ($report) begin
                   \$display("================ GEMM REPORT: @TITLE@ ================");
-                  \$display("Result C = A x B");
-@PRINT_C@
+@PRINT_MATRICES@
+                  \$display("-----------------------------------------------------");
                   \$display("Latency (clock cycles)     : %0d", $cnt_cycles);
                   \$display("Instructions executed      : %0d", $cnt_instr);
                   \$display("CPI                        : %0d.%03d", $cnt_cycles / $cnt_instr,
@@ -204,8 +204,9 @@
                end
             end
 
-   // Pass when the program has ended and every element of C is correct
-   *passed = |cpu>>5$done &&
+   // Pass when the program has ended and every element of C is correct.
+   // >>9 raises "passed" 4 cycles after the report prints, so the log is not cut off
+   *passed = |cpu>>9$done &&
 @PASS@
    *failed = *cyc_cnt > @FAILCYC@;
 \SV
