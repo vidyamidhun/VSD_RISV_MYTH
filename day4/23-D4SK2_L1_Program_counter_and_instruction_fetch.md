@@ -61,9 +61,36 @@ The instruction memory is enabled by this line in the macro section of the start
 m4+imem(@1)
 ```
 
+### Makerchip Diagram
+
+![Makerchip diagram of the PC and instruction fetch](images/lec23/2.png)
+
+The PC and memory inputs are in stage `@0`. The fetched data and `$instr` are in stage `@1`. The instruction memory has 8 entries, `/imem[7:0]`.
+
 ### Waveform
 
-**Pending:** the waveform showing `$pc` and `$instr` from reset has not been added yet.
+![Waveform of the PC and instruction fetch](images/lec23/1.png)
+
+### Observations
+
+Each instruction appears in `@1` one cycle after its PC appears in `@0`.
+
+| `$pc` | Memory index | `$instr` in the next cycle |
+|---|---|---|
+| `0x18` | 6 | `0xFEC6CCE3` |
+| `0x1C` | 7 | `0x00070533` |
+| `0x20` | 0 | `0x00000533` |
+| `0x24` | 1 | `0x00050733` |
+| `0x28` | 2 | `0x00A50613` |
+| `0x2C` | 3 | `0x000506B3` |
+
+- The PC increases by 4 over the values shown.
+- The fetched values match the instruction memory contents shown in the waveform.
+- `$imem_rd_en` is 1 and `$reset` is 0 in this window.
+- The memory index wraps from 7 to 0, so the instructions repeat. The PC keeps increasing.
+- Branch logic is not included yet, so the `blt` instruction does not change the PC.
+
+**Note:** this waveform starts partway through the run and does not show the PC sequence during and immediately after reset.
 
 ### Reference
 
