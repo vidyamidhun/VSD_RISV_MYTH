@@ -20,11 +20,48 @@ The destination register number must travel with the load, or be taken from the 
 
 ## My Lab Work and Results
 
-**To do:** Show a load followed by an instruction that uses the loaded value.
+The CPU now starts an instruction every cycle, with logic in `@1`, `@2` and `@3` and register bypass. The two instructions after a load are marked invalid, and the PC returns to the instruction after the load. A test load, `lw x15, 4(x0)`, was added before the final `add`. Load data is not written to `x15` yet.
 
-<!-- Add your own code, observations and screenshots here.
-     Screenshot folder: images/lec31/
-     Format: ![Description](images/lec31/screenshot.png) -->
+Code: [lec31_load_redirect.tlv](../src/lec31_load_redirect.tlv)
+
+### Load redirect logic
+
+```tlv
+$valid = ! $reset &&
+         ! (>>1$valid_taken_br || >>2$valid_taken_br ||
+            >>1$valid_load     || >>2$valid_load);
+
+$valid_load = $valid && $is_load;
+```
+
+PC selection:
+
+```tlv
+$pc[31:0] = >>1$reset          ? 32'd0 :
+            >>3$valid_taken_br ? >>3$br_tgt_pc :
+            >>3$valid_load     ? >>3$inc_pc :
+                                 >>1$inc_pc;
+```
+
+### Waveform: start of the run
+
+![Waveform of the pipeline start and register bypass](images/lec31/1.png)
+
+Cycle 0 is the first cycle after reset.
+
+| Observation | Waveform |
+|---|---|
+| An instruction is fetched every cycle | `@0$pc` is `0x00`, `0x04`, `0x08`, `0x0C` in cycles 0 to 3 |
+| The first instruction reaches `@3` in cycle 3 | `@3$valid = 1`, `@3$rf_wr_en = 1`, index `0a`, result 0 |
+| Register bypass works | In cycle 3, `@2$rf_rd_data1 = 0000000a` but `@2$src1_value = 00000000` |
+
+In cycle 3, `add x14, x10, x0` reads `x10` while the previous instruction is writing 0 to it. The register file still gives the old value, 10. The bypass supplies the new value, 0.
+
+**Load redirect waveform and simulation log:** Pending.
+
+### Makerchip diagram
+
+![Pipelined CPU diagram](images/lec31/2.png)
 
 ---
 
