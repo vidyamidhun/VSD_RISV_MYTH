@@ -39,11 +39,7 @@ From the [CPU code](../src/basic_riscv_cpu.tlv):
 
 The test program is designed to add the numbers from 1 to 9, store the sum with `sw` and load it into `x15` with `lw`. This test does not check every supported instruction.
 
-### Simulation Log
-
-**Pending:** the Makerchip simulation log has not been added yet.
-
----
+-----
 
 ## Summary
 
